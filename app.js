@@ -1,6 +1,6 @@
 import express from "express";
 
-import { HTMX_KNOWLEDGE } from "./data/htmx-info.js";
+import { famous_quotes } from "./data/quotes.js";
 
 const app = express();
 
@@ -23,12 +23,11 @@ app.get("/", (req, res) => {
       </head>
       <body>
         <header id="main-header">
-          <img src="/htmx-logo.jpg" alt="HTMX Logo" />
-          <h1>Essentials</h1>
+          <h1>Famous Quotes</h1>
         </header>
         <main>
-          <p>HTMX is a JavaScript library that you use without writing JavaScript code.</p>
-          <button>Learn More</button>
+          <p>Famous quotes from famous people, which one speaks to you?</p>
+          <button>Show</button>
         </main>
       </body>
     </html>
