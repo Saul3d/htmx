@@ -26,21 +26,12 @@ app.get("/", (req, res) => {
           <img src="/htmx-logo.jpg" alt="HTMX Logo" />
           <h1>Essentials</h1>
         </header>
-
         <main>
           <p>HTMX is a JavaScript library that you use without writing JavaScript code.</p>
-          <button hx-get="/info" hx-target="main" hx-swap="beforeend">Learn More</button>
+          <button>Learn More</button>
         </main>
       </body>
     </html>
-  `);
-});
-
-app.get("/info", (req, res) => {
-  res.send(`
-    <ul>
-      ${HTMX_KNOWLEDGE.map((item) => `<li>${item}</li>`).join("")}
-    </ul>
   `);
 });
 
