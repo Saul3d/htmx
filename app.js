@@ -4,6 +4,7 @@ import { famous_quotes } from "./data/quotes.js";
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true })); // Middleware used to extract/parse the form data.
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -22,15 +23,34 @@ app.get("/", (req, res) => {
         <link rel="stylesheet" href="/main.css" />
       </head>
       <body>
-        <header id="main-header">
-          <h1>Famous Quotes</h1>
-        </header>
         <main>
           <p>Famous quotes from famous people, which one speaks to you?</p>
-          <button>Show</button>
+          <form hx-post="/quote" hx-target="ul" hx-swap="outerHTML">
+            <p>
+              <label for="quote">Your Quote</label>
+              <input type="text" id="quote" name="quote" />
+            </p>
+            <p>
+              <button>Show</button>
+            </p>
+          </form>
+          <ul>
+            ${famous_quotes.map((quote) => `<li>${quote}</li>`).join("")}
+          </ul>
         </main>
       </body>
     </html>
+  `);
+});
+
+app.post("/quote", (req, res) => {
+  const enteredQuote = req.body.quote;
+  famous_quotes.unshift(enteredQuote);
+  // res.redirect('/');
+  res.send(` 
+    <ul>
+      ${famous_quotes.map((quote) => `<li>${quote}</li>`).join("")}
+    </ul>
   `);
 });
 
